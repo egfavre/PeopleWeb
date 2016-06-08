@@ -35,17 +35,36 @@ public class Main {
                 "/",
                 (request, response) -> {
                     int offset = 0;
+
                     String offsetStr = request.queryParams("offset");
                     if (offsetStr != null) {
                         offset = Integer.valueOf(offsetStr);
                     }
+
+                    int next = offset + 20;
+                    int prev = offset - 20;
+                    boolean previousCondition = false;
+                    boolean nextCondition = false;
+                    if(offset > 0) {
+                        previousCondition = true;
+                    }
+                    if(offset < people.size()-20){
+                        nextCondition = true;
+                    }
+//...
                     HashMap m = new HashMap();
                     ArrayList<Person> temp = new ArrayList<Person>(people.subList(offset, 20+offset));
                     m.put("people", temp);
+                    m.put("offset", offset);
+                    m.put("next", next);
+                    m.put("prev", prev);
+                    m.put("previousCondition", previousCondition);
+                    m.put("nextCondition", nextCondition);
                     return new ModelAndView(m, "home.html");
                 },
                 new MustacheTemplateEngine()
         );
+
 
 
     }

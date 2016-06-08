@@ -9,8 +9,12 @@
 <ol>{{firstName}} {{lastName}}</ol>
 {{/people}}
 
-<form action="/nextPrev" method="post">
-    <button type="submit">Previous</button><button type="submit">Next</button>
-</form>
+{{#previousCondition}}
+<a href="/?offset={{prev}}">Previous</a>
+{{/previousCondition}}
+
+{{#nextCondition}}
+<a href="/?offset={{next}}">Next</a>
+{{/nextCondition}}
 </body>
 </html>
