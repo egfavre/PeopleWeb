@@ -34,15 +34,18 @@ public class Main {
         Spark.get(
                 "/",
                 (request, response) -> {
+                    int offset = 0;
+                    String offsetStr = request.queryParams("offset");
+                    if (offsetStr != null) {
+                        offset = Integer.valueOf(offsetStr);
+                    }
                     HashMap m = new HashMap();
-                    m.put("people", people);
+                    ArrayList<Person> temp = new ArrayList<Person>(people.subList(offset, 20+offset));
+                    m.put("people", temp);
                     return new ModelAndView(m, "home.html");
                 },
                 new MustacheTemplateEngine()
         );
-
-
-
 
 
     }
