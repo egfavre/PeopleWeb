@@ -71,19 +71,11 @@ public class Main {
                     HashMap p = new HashMap();
                     int id = Integer.valueOf(request.queryParams("id"));
                     Person selection = people.get(id);
-                    p.put("person", selection);
-                    //id,first_name,last_name,email,country,ip_address
-                    p.put("id", id);
-                    p.put("first_name", selection.firstName);
-                    p.put("last_name", selection.lastName);
-                    p.put("email", selection.email);
-                    p.put("country", selection.counry);
-                    p.put("ipAddress", selection.ipAddress);
-
+                    p.put("selection", selection);
 
                     return new ModelAndView(p, "person.html");
-                }
-
+                },
+                new MustacheTemplateEngine()
         );
     }
 }
