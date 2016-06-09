@@ -1,10 +1,8 @@
 package com.egfavre;
 
 import spark.ModelAndView;
-import spark.Session;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -35,8 +33,9 @@ public class Main {
                 "/",
                 (request, response) -> {
                     int offset = 0;
-
                     String offsetStr = request.queryParams("offset");
+
+
                     if (offsetStr != null) {
                         offset = Integer.valueOf(offsetStr);
                     }
@@ -60,12 +59,31 @@ public class Main {
                     m.put("prev", prev);
                     m.put("previousCondition", previousCondition);
                     m.put("nextCondition", nextCondition);
+
                     return new ModelAndView(m, "home.html");
                 },
                 new MustacheTemplateEngine()
         );
 
+        Spark.get(
+                "/person",
+                (request, response) -> {
+                    HashMap p = new HashMap();
+                    int id = Integer.valueOf(request.queryParams("id"));
+                    Person selection = people.get(id);
+                    p.put("person", selection);
+                    //id,first_name,last_name,email,country,ip_address
+                    p.put("id", id);
+                    p.put("first_name", selection.firstName);
+                    p.put("last_name", selection.lastName);
+                    p.put("email", selection.email);
+                    p.put("country", selection.counry);
+                    p.put("ipAddress", selection.ipAddress);
 
 
+                    return new ModelAndView(p, "person.html");
+                }
+
+        );
     }
 }

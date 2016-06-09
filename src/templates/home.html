@@ -6,7 +6,8 @@
 </head>
 <body>
 {{#people}}
-<ol>{{firstName}} {{lastName}}</ol>
+<ol><a href="/person?id={{id}}">{{firstName}} {{lastName}}</a></ol>
+<input type="hidden" name="id" value="{{id}}"/>
 {{/people}}
 
 {{#previousCondition}}

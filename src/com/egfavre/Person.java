@@ -67,7 +67,17 @@ public class Person {
         this.email = email;
         this.counry = counry;
         this.ipAddress = ipAddress;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", counry='" + counry + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                '}';
     }
 }
